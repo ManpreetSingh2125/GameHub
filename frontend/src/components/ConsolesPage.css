@@ -1,0 +1,56 @@
+.consoles-page {
+  padding: 20px;
+  text-align: center;
+}
+
+.console-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.console-card {
+  background: var(--secondary-color);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+}
+
+.console-card img {
+  width: 100%;
+  max-width: 200px; /* Adjust as needed */
+  height: auto;
+  object-fit: cover;
+}
+
+.console-card h3 {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.console-card p {
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+/* Responsive Consoles Page */
+@media (max-width: 768px) {
+  .console-card {
+    width: 100%;
+  }
+}
+
+.console-card .description {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 10px 0;
+}
+
+.console-card .rating {
+  font-size: 0.9rem;
+  color: #ff9800;
+  margin-bottom: 10px;
+}

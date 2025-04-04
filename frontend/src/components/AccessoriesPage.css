@@ -1,0 +1,58 @@
+/* Accessories Page */
+.accessories-page {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .accessory-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .accessory-card {
+    background: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+  }
+  
+  .accessory-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .accessory-card h3 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+  
+  .accessory-card p {
+    font-size: 1rem;
+    color: var(--text-color);
+  }
+  
+  .accessory-card .description {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 10px 0;
+  }
+  
+  .accessory-card .rating {
+    font-size: 0.9rem;
+    color: #ff9800;
+    margin-bottom: 10px;
+  }
+  
+  /* Responsive Accessories Page */
+  @media (max-width: 768px) {
+    .accessory-card {
+      width: 100%;
+    }
+  }
+
+  
