@@ -20,10 +20,20 @@ const gameSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-  }
+  },
+  additionalInfo: {
+    requirements: {
+      type: String,
+      required: true,
+    },
+    size: {
+      type: String,
+      required: true,
+    },
+  },
 });
 
 // Create and export the Game model
 const Game = mongoose.model('Game', gameSchema);
 
-export default Game; // Ensure this is a default export
+export default Game; // Default export

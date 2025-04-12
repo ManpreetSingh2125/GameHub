@@ -147,3 +147,99 @@ button:hover {
     font-size: 14px;
   }
 }
+
+/* Admin Login Button */
+.admin-login-button {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.admin-btn {
+  background-color: #ff5722; /* Vibrant orange color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+.admin-btn:hover {
+  background-color: #e64a19; /* Darker orange on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Tabs Styling */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #333; /* Darker tab background */
+  color: #ccc; /* Light gray text */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 5px 5px 0 0;
+}
+
+.tab.active {
+  background-color: #007bff; /* Blue for active tab */
+  color: white;
+}
+
+.tab:hover {
+  background-color: #444; /* Slightly lighter on hover */
+}
+
+/* Form Styling */
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #ccc; /* Light gray text for labels */
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #333; /* Dark input background */
+  color: #fff; /* White text in inputs */
+  border: 1px solid #444; /* Dark border */
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #007bff; /* Blue border on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blue glow on focus */
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff; /* Blue submit button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}

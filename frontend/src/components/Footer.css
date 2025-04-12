@@ -1,0 +1,91 @@
+.footer {
+    background-color: #1a1a1a; /* Dark background matching the app theme */
+    color: #ccc; /* Light text color for readability */
+    padding: 40px 20px;
+    border-top: 1px solid #444; /* Subtle border to separate from content */
+    margin-top: 40px; /* Space above the footer */
+  }
+  
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .footer-section {
+    flex: 1;
+    min-width: 200px;
+    text-align: left;
+  }
+  
+  .footer-section h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  
+  .footer-section h4 {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  
+  .footer-section p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-section ul li {
+    margin-bottom: 8px;
+  }
+  
+  .footer-section ul li a {
+    color: #ff9800; /* Orange links to match the app theme */
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+  
+  .footer-section ul li a:hover {
+    color: #e64a19; /* Darker orange on hover */
+  }
+  
+  .social-links {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .social-links a {
+    color: #ff9800;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+  
+  .social-links a:hover {
+    color: #e64a19;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .footer-section {
+      margin-bottom: 20px;
+    }
+  
+    .social-links {
+      justify-content: center;
+    }
+  }

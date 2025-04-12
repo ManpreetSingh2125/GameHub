@@ -1,0 +1,106 @@
+/* Global Styles */
+body {
+    font-family: "Poppins", sans-serif;
+    background-image: url('../components/img/bannerauth1.png'); /* Reuse the same background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff; /* White text for contrast */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .admin-login-page {
+    max-width: 500px; /* Slightly smaller width for admin login */
+    min-height: 350px; /* Adjusted height */
+    margin: 50px auto;
+    padding: 25px;
+    background-color: rgba(26, 26, 26, 0.95); /* Dark semi-transparent background */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Subtle shadow for depth */
+    text-align: center;
+    overflow: auto; /* Handle overflow */
+  }
+  
+  .admin-login-page h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #ff5722; /* Orange heading to indicate admin-specific context */
+    text-transform: uppercase; /* Uppercase for emphasis */
+    letter-spacing: 2px; /* Add spacing for a cleaner look */
+  }
+  
+  /* Form Group Styling */
+  .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ccc; /* Light gray text for labels */
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #333; /* Dark input background */
+    color: #fff; /* White text in inputs */
+    border: 1px solid #444; /* Dark border */
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: #ff5722; /* Orange border on focus */
+    box-shadow: 0 0 5px rgba(255, 87, 34, 0.5); /* Orange glow on focus */
+  }
+  
+  /* Button Styling */
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff5722; /* Orange button */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #e64a19; /* Darker orange on hover */
+  }
+  
+  /* Error and Success Messages */
+  .error {
+    color: #ff5555; /* Bright red for error messages */
+    margin-bottom: 15px;
+  }
+  
+  .success {
+    color: #55ff55; /* Bright green for success messages */
+    margin-bottom: 15px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .admin-login-page {
+      margin: 20px;
+      padding: 15px;
+    }
+  
+    .form-group input {
+      font-size: 14px;
+    }
+  
+    button {
+      font-size: 14px;
+    }
+  }

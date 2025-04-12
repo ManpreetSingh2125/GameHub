@@ -13,8 +13,9 @@ import g6Image from "../components/img/g6.png"; // Assassin's Creed Valhalla
 import g7Image from "../components/img/g7.png"; // Assassin's Creed Valhalla
 import g8Image from "../components/img/g8.png"; // Assassin's Creed Valhalla
 import g9Image from "../components/img/g9.png"; // Assassin's Creed Valhalla
-
-
+import g10Image from "../components/img/g10.png"; // Assassin's Creed Valhalla
+import g11Image from "../components/img/g11.png"; // Assassin's Creed Valhalla
+import g12Image from "../components/img/g12.png"; // Assassin's Creed Valhalla
 
 
 const GamesPage = () => {
@@ -32,10 +33,11 @@ const GamesPage = () => {
     "Assassin's Creed Valhalla": g5Image,
     "Fortnite": g6Image,
     "Minecraft": g7Image,
-    "The Legend of Zelda: Breath of the Wild": g8Image,
-    "Resident Evil Village": g9Image
-
-
+    "Breath of the Wild": g8Image,
+    "Resident Evil Village": g9Image,
+    'Halo Infinite': g10Image,
+    'Final Fantasy XV': g11Image,
+    'Overwatch 2': g12Image,
   };
 
   useEffect(() => {

@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
-import Swal from "sweetalert2"; // Import SweetAlert2
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import Swal from "sweetalert2";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer"; // Import the Footer component
 import LandingPage from "./components/LandingPage";
 import ConsolesPage from "./components/ConsolesPage";
 import GamesPage from "./components/GamesPage";
@@ -10,9 +16,12 @@ import AccessoriesPage from "./components/AccessoriesPage";
 import AuthPage from "./components/AuthPage";
 import CartPage from "./components/CartPage";
 import CheckoutPage from "./components/CheckoutPage";
-// import AdminPage from "./components/AdminPage";
 import GameDetailsPage from "./components/GameDetailsPage";
 import OrderConfirmationPage from "./components/OrderConfirmationPage";
+import AdminLoginPage from "./components/AdminLoginPage";
+import AdminDashboard from "./components/AdminDashboard";
+import AdminProtectedRoute from "./components/AdminProtectedRoute";
+
 import "./App.css";
 
 function App() {
@@ -36,7 +45,7 @@ function App() {
         title: "Already in Cart!",
         text: `"${item.name}" is already in your cart.`,
         confirmButtonText: "OK",
-        theme: 'dark',
+        theme: "dark",
       });
       return;
     }
@@ -47,7 +56,7 @@ function App() {
       title: "Added to Cart!",
       text: `"${item.name}" has been added to your cart.`,
       confirmButtonText: "OK",
-      theme: 'dark',
+      theme: "dark",
     });
   };
 
@@ -61,7 +70,7 @@ function App() {
       showCancelButton: true,
       confirmButtonText: "Yes, Remove",
       cancelButtonText: "Cancel",
-      theme: 'dark',
+      theme: "dark",
     }).then((result) => {
       if (result.isConfirmed) {
         setCart(cart.filter((item) => item._id !== id));
@@ -71,7 +80,6 @@ function App() {
           text: `"${itemToRemove.name}" has been removed from your cart.`,
           confirmButtonText: "OK",
           theme: "dark",
-
         });
       }
     });
@@ -84,7 +92,6 @@ function App() {
       return;
     }
 
-    // Update cart quantity without showing an alert
     setCart(
       cart.map((item) =>
         item._id === id ? { ...item, quantity: newQuantity } : item
@@ -100,7 +107,7 @@ function App() {
         title: "Empty Cart!",
         text: "Your cart is empty. Please add items to proceed.",
         confirmButtonText: "OK",
-        theme: 'dark',
+        theme: "dark",
       });
       return;
     }
@@ -110,7 +117,7 @@ function App() {
       title: "Order Placed!",
       text: "Your order has been successfully placed.",
       confirmButtonText: "OK",
-      theme: 'dark',
+      theme: "dark",
     }).then(() => {
       setCart([]); // Clear the cart after placing the order
     });
@@ -125,7 +132,7 @@ function App() {
       showCancelButton: true,
       confirmButtonText: "Yes, Log Out",
       cancelButtonText: "Cancel",
-      theme: 'dark',
+      theme: "dark",
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem("token");
@@ -141,26 +148,26 @@ function App() {
     });
   };
 
-  // const isAdminRouteAccessible = () => {
-  //   return user && user.isAdmin ? <AdminPage /> : <Navigate to="/" />;
-  // };
-
   return (
     <Router>
-      {/* Conditionally Render Navbar */}
       <Routes>
         {/* Public Routes */}
         <Route path="/auth" element={<AuthPage setUser={setUser} />} />
+        <Route
+          path="/admin-login"
+          element={<AdminLoginPage setUser={setUser} />}
+        />
 
         {/* Protected Routes */}
         <Route
           path="/"
           element={
             <>
-              {user && <Navbar cart={cart} logout={logout} />}
+              {user && <Navbar cart={cart} logout={logout} user={user} />}
               <ProtectedRoute>
                 <LandingPage />
               </ProtectedRoute>
+              {user && <Footer />}
             </>
           }
         />
@@ -168,10 +175,11 @@ function App() {
           path="/consoles"
           element={
             <>
-              {user && <Navbar cart={cart} logout={logout} />}
+              {user && <Navbar cart={cart} logout={logout} user={user} />}
               <ProtectedRoute>
                 <ConsolesPage addToCart={addToCart} />
               </ProtectedRoute>
+              {user && <Footer />}
             </>
           }
         />
@@ -179,10 +187,11 @@ function App() {
           path="/games"
           element={
             <>
-              {user && <Navbar cart={cart} logout={logout} />}
+              {user && <Navbar cart={cart} logout={logout} user={user} />}
               <ProtectedRoute>
                 <GamesPage addToCart={addToCart} />
               </ProtectedRoute>
+              {user && <Footer />}
             </>
           }
         />
@@ -190,10 +199,11 @@ function App() {
           path="/games/:id"
           element={
             <>
-              {user && <Navbar cart={cart} logout={logout} />}
+              {user && <Navbar cart={cart} logout={logout} user={user} />}
               <ProtectedRoute>
                 <GameDetailsPage addToCart={addToCart} />
               </ProtectedRoute>
+              {user && <Footer />}
             </>
           }
         />
@@ -201,10 +211,11 @@ function App() {
           path="/accessories"
           element={
             <>
-              {user && <Navbar cart={cart} logout={logout} />}
+              {user && <Navbar cart={cart} logout={logout} user={user} />}
               <ProtectedRoute>
                 <AccessoriesPage addToCart={addToCart} />
               </ProtectedRoute>
+              {user && <Footer />}
             </>
           }
         />
@@ -212,7 +223,7 @@ function App() {
           path="/cart"
           element={
             <>
-              {user && <Navbar cart={cart} logout={logout} />}
+              {user && <Navbar cart={cart} logout={logout} user={user} />}
               <ProtectedRoute>
                 <CartPage
                   cart={cart}
@@ -220,6 +231,7 @@ function App() {
                   updateCart={updateCart}
                 />
               </ProtectedRoute>
+              {user && <Footer />}
             </>
           }
         />
@@ -227,10 +239,11 @@ function App() {
           path="/checkout"
           element={
             <>
-              {user && <Navbar cart={cart} logout={logout} />}
+              {user && <Navbar cart={cart} logout={logout} user={user} />}
               <ProtectedRoute>
                 <CheckoutPage cart={cart} placeOrder={placeOrder} />
               </ProtectedRoute>
+              {user && <Footer />}
             </>
           }
         />
@@ -238,10 +251,23 @@ function App() {
           path="/order-confirmation"
           element={
             <>
-              {user && <Navbar cart={cart} logout={logout} />}
+              {user && <Navbar cart={cart} logout={logout} user={user} />}
               <ProtectedRoute>
                 <OrderConfirmationPage />
               </ProtectedRoute>
+              {user && <Footer />}
+            </>
+          }
+        />
+        <Route
+          path="/admin-dashboard"
+          element={
+            <>
+              {user && <Navbar cart={cart} logout={logout} user={user} />}
+              <AdminProtectedRoute user={user}>
+                <AdminDashboard />
+              </AdminProtectedRoute>
+              {user && <Footer />}
             </>
           }
         />

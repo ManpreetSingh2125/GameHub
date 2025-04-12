@@ -22,6 +22,18 @@ const LandingPage = () => {
           </div>
         </section>
 
+        {/* About Us Banner */}
+        <section className="about-banner">
+          <div className="about-content">
+            <h2>About GameHub</h2>
+            <p>
+              At GameHub, we're passionate about gaming. Our mission is to bring
+              you the latest consoles and accessories to elevate your gaming
+              experience.
+            </p>
+          </div>
+        </section>
+
         {/* Featured Consoles Section */}
         <section className="featured-consoles">
           <h2>Featured Consoles</h2>

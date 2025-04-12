@@ -153,3 +153,19 @@
     font-size: 0.9rem;
   }
 }
+.about-banner {
+  background-color: #1a1a1a; /* Dark background to match the theme */
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.about-content h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}

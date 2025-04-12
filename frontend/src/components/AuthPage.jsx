@@ -11,7 +11,6 @@ const AuthPage = ({ setUser }) => {
     email: "",
     password: "",
   });
-
   const navigate = useNavigate();
 
   // Reset form when switching tabs
@@ -25,7 +24,6 @@ const AuthPage = ({ setUser }) => {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await api.post("/api/auth/login", {
         email: formData.email,
@@ -37,58 +35,49 @@ const AuthPage = ({ setUser }) => {
         const payload = JSON.parse(atob(response.data.token.split(".")[1]));
         setUser({ id: payload.userId, isAdmin: payload.isAdmin }); // Update user state
 
-        // Show success alert
         Swal.fire({
           icon: "success",
           title: "Login Successful!",
           text: "You are now logged in.",
           confirmButtonText: "OK",
-          theme: "dark"
-
+          theme: "dark",
         }).then(() => {
           navigate("/"); // Redirect to homepage after confirmation
         });
       }
     } catch (err) {
-      // Show error alert
       Swal.fire({
         icon: "error",
         title: "Login Failed!",
         text: err.response?.data?.message || "An error occurred during login.",
         confirmButtonText: "Try Again",
-        theme: "dark"
-
+        theme: "dark",
       });
     }
   };
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await api.post("/api/auth/register", formData);
-
       if (response.data.token) {
-        // Show success alert
         Swal.fire({
           icon: "success",
           title: "Registration Successful!",
           text: "You have been registered successfully. Please log in.",
           confirmButtonText: "OK",
-          theme: "dark"
-
+          theme: "dark",
         }).then(() => {
           setActiveTab("login"); // Switch to login tab after confirmation
         });
       }
     } catch (err) {
-      // Show error alert
       Swal.fire({
         icon: "error",
         title: "Registration Failed!",
         text: err.response?.data?.message || "An error occurred during registration.",
         confirmButtonText: "Try Again",
-        theme: "dark"
+        theme: "dark",
       });
     }
   };
@@ -96,7 +85,6 @@ const AuthPage = ({ setUser }) => {
   return (
     <div className="auth-page">
       <h1>Authentication</h1>
-
       {/* Tabs */}
       <div className="tabs">
         <button
@@ -112,7 +100,6 @@ const AuthPage = ({ setUser }) => {
           Register
         </button>
       </div>
-
       {/* Tab Content */}
       <div className="tab-content">
         {activeTab === "login" ? (
@@ -174,6 +161,12 @@ const AuthPage = ({ setUser }) => {
             <button type="submit">Register</button>
           </form>
         )}
+      </div>
+      {/* Admin Login Button */}
+      <div className="admin-login-button">
+        <button className="admin-btn" onClick={() => navigate("/admin-login")}>
+          Admin Login
+        </button>
       </div>
     </div>
   );

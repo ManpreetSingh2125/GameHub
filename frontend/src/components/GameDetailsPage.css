@@ -1,25 +1,26 @@
 /* Game Details Page */
-.game-details-page {
-  padding: 20px;
+.game-details-page56 {
+  padding: 40px; /* Increased padding for more space around the content */
   text-align: center;
   background-color: #1a1a1a; /* Dark background color */
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Deeper shadow */
-  margin: 20px auto;
+  margin: 40px auto; /* Increased top/bottom margin for spacing from above */
   max-width: 1200px; /* Larger width for better readability */
 }
 
 .game-details-page h1 {
   font-size: 2.5rem; /* Larger font size for title */
-  margin-bottom: 20px;
+  margin-bottom: 30px; /* Increased spacing below title */
+  margin-top: 0; /* Ensure no extra space above */
   color: #fff; /* White text color */
 }
 
 .game-info {
-  display: flex; /* Flexbox for side-by-side layout */
-  align-items: flex-start; /* Align items at the top */
+  display: flex;
+  align-items: flex-start;
   gap: 30px; /* Space between image and description */
-  margin-bottom: 30px;
+  margin-bottom: 40px; /* Increased spacing below section */
 }
 
 .game-image {
@@ -34,13 +35,13 @@
   flex-grow: 1; /* Allow the description to take up remaining space */
   text-align: left;
   background-color: #2c2c2c; /* Darker gray for description */
-  padding: 30px; /* Increased padding for better spacing */
+  padding: 30px; /* Padding for better spacing */
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Deeper shadow */
 }
 
 .game-description p {
-  margin: 15px 0; /* Increased margin for better spacing */
+  margin: 15px 0; /* Margin for better spacing */
   color: #ccc; /* Lighter text color for better visibility */
 }
 
@@ -64,7 +65,7 @@
   cursor: pointer;
   font-size: 1.2rem; /* Larger font size for button text */
   transition: background-color 0.3s ease;
-  margin-top: 20px; /* Increased margin for better spacing */
+  margin-top: 20px; /* Spacing above button */
 }
 
 .add-to-cart-btn:hover {
@@ -72,13 +73,13 @@
 }
 
 .additional-info-section {
-  margin-top: 40px; /* Increased margin for better spacing */
+  margin-top: 50px; /* Increased spacing above section */
   text-align: left;
 }
 
 .additional-info-section h2 {
   font-size: 2rem; /* Larger font size for subtitle */
-  margin-bottom: 15px;
+  margin-bottom: 20px; /* Increased spacing below subtitle */
   color: #fff; /* White text color */
 }
 
@@ -87,21 +88,6 @@
   color: #ccc; /* Lighter text color for better visibility */
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .game-info {
-    flex-direction: column; /* Stack image and description vertically */
-    align-items: center; /* Center items */
-  }
-
-  .game-image {
-    width: 100%; /* Full width for smaller screens */
-  }
-
-  .game-description {
-    padding: 20px; /* Reduced padding for smaller screens */
-  }
-}
 /* Custom styles for SweetAlert2 buttons */
 .swal-confirm-btn {
   background-color: #4caf50; /* Green for "Keep Shopping" */
@@ -124,105 +110,29 @@
   opacity: 0.9;
 }
 
-/* Game Details Page */
-.game-details-page {
-  padding: 20px;
-  text-align: center;
-  background-color: #1a1a1a; /* Dark background color */
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Deeper shadow */
-  margin: 20px auto;
-  max-width: 1200px; /* Larger width for better readability */
-}
-
-.game-details-page h1 {
-  font-size: 2.5rem; /* Larger font size for title */
-  margin-bottom: 20px;
-  color: #fff; /* White text color */
-}
-
-.game-info {
-  display: flex;
-  align-items: flex-start;
-  gap: 30px; /* Increased spacing between elements */
-}
-
-.game-image {
-  width: 400px; /* Fixed width for the image */
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Deeper shadow for the image */
-}
-
-.game-description {
-  flex-grow: 1; /* Allow the description to take up remaining space */
-  text-align: left;
-  background-color: #2c2c2c; /* Darker gray for description */
-  padding: 30px; /* Increased padding for better spacing */
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Deeper shadow */
-}
-
-.game-description p {
-  margin: 15px 0; /* Increased margin for better spacing */
-  color: #ccc; /* Lighter text color for better visibility */
-}
-
-.game-description .price {
-  font-size: 1.5rem; /* Larger font size for price */
-  font-weight: bold;
-  color: #ff9800; /* Gold color for price */
-}
-
-.game-description .rating {
-  font-size: 1.2rem; /* Slightly larger font size for rating */
-  color: #ff9800; /* Gold color for rating */
-}
-
-.add-to-cart-btn {
-  background-color: var(--accent-color, #ff5722); /* Orange button */
-  color: white;
-  border: none;
-  padding: 15px 30px; /* Larger padding for the button */
-  border-radius: 10px; /* Rounded corners */
-  cursor: pointer;
-  font-size: 1.2rem; /* Larger font size for button text */
-  transition: background-color 0.3s ease;
-  margin-top: 20px; /* Increased margin for better spacing */
-}
-
-.add-to-cart-btn:hover {
-  background-color: #e64a19; /* Darker orange on hover */
-}
-
-.additional-info-section {
-  margin-top: 40px; /* Increased margin for better spacing */
-  text-align: left;
-}
-
-.additional-info-section h2 {
-  font-size: 2rem; /* Larger font size for subtitle */
-  margin-bottom: 15px;
-  color: #fff; /* White text color */
-}
-
-.additional-info-section p {
-  font-size: 1.1rem; /* Slightly larger font size for additional info */
-  color: #ccc; /* Lighter text color for better visibility */
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
+  .game-details-page {
+    padding: 20px; /* Reduced padding for smaller screens */
+    margin: 20px auto; /* Reduced margin for smaller screens */
+  }
+
   .game-info {
     flex-direction: column; /* Stack image and description vertically */
     align-items: center; /* Center items */
+    margin-bottom: 30px; /* Adjusted spacing */
   }
 
   .game-image {
     width: 100%; /* Full width for smaller screens */
+    max-width: 400px; /* Cap the width */
   }
 
   .game-description {
     padding: 20px; /* Reduced padding for smaller screens */
+  }
+
+  .additional-info-section {
+    margin-top: 30px; /* Reduced spacing for smaller screens */
   }
 }

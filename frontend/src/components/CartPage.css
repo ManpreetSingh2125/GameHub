@@ -1,54 +1,56 @@
 /* General Styles */
 .cart-page {
-  max-width: 1000px; /* Increased from 800px for more space */
-  margin: 50px auto;
-  padding: 40px; /* Increased padding for better spacing */
-  background-color: #1a1a1a; /* Dark background */
-  border: 1px solid var(--border-color, #444);
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 40px;
+  background-color: #1a1a1a;
+  border: 1px solid #444;
   border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Deeper shadow for depth */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   text-align: center;
 }
 
 .cart-page h1 {
-  font-size: 2.2rem; /* Slightly larger for better hierarchy */
-  color: #fff; /* White text */
-  margin-bottom: 40px; /* More space below the heading */
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 50px;
+  margin-top: 0;
 }
 
 .cart-content {
   display: flex;
   flex-direction: column;
-  gap: 40px; /* Increased space between sections */
+  gap: 50px;
 }
 
 /* Empty Cart Message */
 .empty-cart {
-  color: var(--text-color, #ccc);
-  font-size: 1.2rem; /* Slightly larger for readability */
+  color: #ccc;
+  font-size: 1.2rem;
 }
 
 /* Cart Items */
 .cart-items {
   list-style: none;
   padding: 0;
-  margin-bottom: 30px; /* More space below the items */
+  margin-bottom: 40px;
 }
 
 .cart-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--secondary-color, #2c2c2c); /* Dark card background */
-  border: 1px solid var(--border-color, #444);
+  background: #2c2c2c;
+  border: 1px solid #444;
   border-radius: 5px;
-  padding: 20px; /* Increased padding for better spacing */
-  margin-bottom: 15px; /* More space between items */
+  padding: 20px;
+  margin-bottom: 20px;
   transition: background-color 0.3s;
+  gap: 40px; /* Increased gap between item-details, quantity-controls, and remove-btn */
 }
 
 .cart-item:hover {
-  background-color: #3a3a3a; /* Subtle hover effect */
+  background-color: #3a3a3a;
 }
 
 .item-details {
@@ -56,115 +58,118 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px; /* Added gap for better spacing between name and price */
+  gap: 30px; /* Increased gap between item-name and item-price */
 }
 
 .item-name {
-  color: var(--text-color, #ccc);
-  font-size: 1.2rem; /* Slightly larger for readability */
+  color: #ccc;
+  font-size: 1.2rem;
 }
 
 .item-price {
-  color: #ff9800; /* Orange for price to match CheckoutPage */
+  color: #ff9800;
   font-weight: bold;
-  font-size: 1.2rem; /* Slightly larger for emphasis */
+  font-size: 1.2rem;
 }
 
 /* Quantity Controls */
 .quantity-controls {
   display: flex;
   align-items: center;
-  gap: 15px; /* Increased gap for better spacing */
-  margin: 0 30px; /* More margin for wider layout */
+  gap: 20px; /* Increased gap between buttons and quantity number */
 }
 
 .quantity-btn {
-  background-color: #333; /* Dark button background */
+  background-color: #333;
   color: #fff;
-  border: 1px solid var(--border-color, #444);
+  border: 1px solid #444;
   border-radius: 5px;
-  padding: 6px 12px; /* Slightly larger buttons */
-  font-size: 1.1rem; /* Larger font for readability */
+  padding: 6px 12px;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .quantity-btn:hover {
-  background-color: #555; /* Lighter on hover */
+  background-color: #555;
+}
+
+.quantity-btn:disabled {
+  background-color: #222;
+  cursor: not-allowed;
 }
 
 .quantity {
   color: #fff;
-  font-size: 1.1rem; /* Slightly larger for readability */
-  min-width: 25px; /* Increased width for better alignment */
+  font-size: 1.1rem;
+  min-width: 25px;
   text-align: center;
 }
 
 /* Remove Button */
 .remove-btn {
-  background-color: #dc3545; /* Red for remove button */
+  background-color: #dc3545;
   color: #fff;
   border: none;
-  padding: 10px 20px; /* Larger button for better clickability */
+  padding: 10px 20px;
   border-radius: 5px;
-  font-size: 1rem; /* Slightly larger font */
+  font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.1s;
 }
 
 .remove-btn:hover {
-  background-color: #c82333; /* Darker red on hover */
-  transform: scale(1.02); /* Slight scale effect on hover */
+  background-color: #c82333;
+  transform: scale(1.02);
 }
 
 /* Price Breakdown Section */
 .price-breakdown {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Space between rows */
-  padding: 20px; /* Padding for prominence */
-  background-color: var(--secondary-color, #2c2c2c);
-  border: 1px solid var(--border-color, #444);
+  gap: 12px;
+  padding: 20px;
+  background-color: #2c2c2c;
+  border: 1px solid #444;
   border-radius: 5px;
+  margin-top: 30px;
 }
 
 .price-breakdown div {
   display: flex;
   justify-content: space-between;
-  font-size: 1.2rem; /* Readable font size */
-  color: var(--text-color, #ccc);
+  font-size: 1.2rem;
+  color: #ccc;
 }
 
 .price-breakdown .subtotal,
 .price-breakdown .tax {
-  font-weight: normal; /* Regular weight for subtotal and tax */
+  font-weight: normal;
 }
 
 .price-breakdown .total {
-  font-weight: bold; /* Bold for total */
-  font-size: 1.4rem; /* Larger font for emphasis */
-  color: #ff9800; /* Highlight total amount */
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #fff;
 }
 
 /* Proceed to Checkout Button */
 .pay-now-btn {
-  background-color: var(--primary-color, #ff5722); /* Orange to match screenshot */
+  background-color: #ff5722;
   color: #fff;
   border: none;
-  padding: 15px 25px; /* Larger button for better clickability */
+  padding: 15px 25px;
   border-radius: 5px;
-  font-size: 1.2rem; /* Slightly larger font */
+  font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.1s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-top: 30px;
 }
 
 .pay-now-btn:hover {
-  background-color: #e64a19; /* Darker orange on hover */
-  transform: scale(1.02); /* Slight scale effect on hover */
+  background-color: #e64a19;
+  transform: scale(1.02);
 }
 
 .pay-now-btn:disabled {
@@ -175,64 +180,71 @@
 /* Responsive Cart Page */
 @media (max-width: 768px) {
   .cart-page {
-    max-width: 90%; /* Adjusted for smaller screens */
-    margin: 20px auto; /* Centered with less margin */
-    padding: 25px; /* Adjusted padding */
+    max-width: 90%;
+    margin: 30px auto;
+    padding: 25px;
   }
 
   .cart-page h1 {
-    font-size: 1.8rem; /* Adjusted for smaller screens */
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .cart-content {
+    gap: 30px;
   }
 
   .cart-item {
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px; /* Adjusted gap */
-    padding: 15px; /* Adjusted padding */
+    gap: 20px; /* Adjusted gap for smaller screens */
+    padding: 15px;
+    margin-bottom: 15px;
   }
 
   .item-details {
     width: 100%;
     justify-content: space-between;
-    gap: 10px; /* Adjusted gap */
+    gap: 15px; /* Adjusted gap for smaller screens */
   }
 
   .item-name,
   .item-price {
-    font-size: 1rem; /* Adjusted for smaller screens */
+    font-size: 1rem;
   }
 
   .quantity-controls {
-    margin: 15px 0; /* Adjusted margin */
-    gap: 10px; /* Adjusted gap */
+    gap: 15px; /* Adjusted gap for smaller screens */
   }
 
   .quantity-btn {
-    padding: 5px 10px; /* Adjusted button size */
-    font-size: 1rem; /* Adjusted font size */
+    padding: 5px 10px;
+    font-size: 1rem;
   }
 
   .quantity {
-    font-size: 1rem; /* Adjusted font size */
-    min-width: 20px; /* Adjusted width */
+    font-size: 1rem;
+    min-width: 20px;
   }
 
   .remove-btn {
-    padding: 8px 15px; /* Adjusted button size */
-    font-size: 0.9rem; /* Adjusted font size */
+    padding: 8px 15px;
+    font-size: 0.9rem;
   }
 
   .price-breakdown {
-    font-size: 1rem; /* Adjusted font size */
-    padding: 15px; /* Adjusted padding */
+    font-size: 1rem;
+    padding: 15px;
+    margin-top: 20px;
   }
 
   .price-breakdown .total {
-    font-size: 1.2rem; /* Adjusted font size */
+    font-size: 1.2rem;
   }
 
   .pay-now-btn {
-    font-size: 1.1rem; /* Adjusted font size */
-    padding: 12px 20px; /* Adjusted button size */
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    margin-top: 20px;
   }
 }

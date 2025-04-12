@@ -32,7 +32,7 @@ const CartPage = ({ cart, removeFromCart, updateCart }) => {
 
   // Navigate to Checkout Page
   const handleProceedToCheckout = () => {
-    navigate("/checkout"); // Adjust the path based on your routing setup
+    navigate("/checkout");
   };
 
   return (
@@ -46,10 +46,10 @@ const CartPage = ({ cart, removeFromCart, updateCart }) => {
             {/* Cart Items */}
             <ul className="cart-items">
               {cart.map((item) => (
-                <li key={item._id} className="cart-item">
+                <li key={item._id || item.name} className="cart-item">
                   <div className="item-details">
                     <span className="item-name">{item.name}</span>
-                    <span className="item-price">${item.price.toFixed(2)}</span>
+                    <span className="item-price">${(item.price * (item.quantity || 1)).toFixed(2)}</span>
                   </div>
                   <div className="quantity-controls">
                     <button
@@ -101,6 +101,7 @@ const CartPage = ({ cart, removeFromCart, updateCart }) => {
             <button
               className="pay-now-btn"
               onClick={handleProceedToCheckout}
+              disabled={cart.length === 0}
             >
               Proceed to Checkout
             </button>

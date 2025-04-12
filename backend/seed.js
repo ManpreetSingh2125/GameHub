@@ -32,89 +32,137 @@ const seedConsoles = [
 ];
 
 const seedGames = [
-  { 
-    name: 'Cyberpunk 2077', 
-    price: 59, 
-    description: 'An open-world RPG set in a dystopian future.', 
+  {
+    name: 'Cyberpunk 2077',
+    price: 59,
+    description: 'An open-world RPG set in a dystopian future.',
     rating: 3.9,
-    category: 'RPG' // Category added here
+    category: 'RPG',
+    additionalInfo: {
+      requirements: 'Windows 10 64-bit, Intel Core i7-4790 or AMD Ryzen 3 3200G, 12GB RAM, NVIDIA GTX 1060 6GB or AMD Radeon R9 Fury, 70GB storage',
+      size: '70GB'
+    }
   },
-  { 
-    name: 'The Witcher 3', 
-    price: 39, 
-    description: 'A story-driven open-world RPG.', 
+  {
+    name: 'The Witcher 3',
+    price: 39,
+    description: 'A story-driven open-world RPG.',
     rating: 4.9,
-    category: 'RPG' // Category added here
+    category: 'RPG',
+    additionalInfo: {
+      requirements: 'Windows 7/8/10 64-bit, Intel Core i5-2500K or AMD Phenom II X4 940, 6GB RAM, NVIDIA GTX 660 or AMD Radeon HD 7870, 35GB storage',
+      size: '35GB'
+    }
   },
-  { 
-    name: 'Red Dead Redemption 2', 
-    price: 49, 
-    description: 'A cinematic experience in the Wild West.', 
+  {
+    name: 'Red Dead Redemption 2',
+    price: 49,
+    description: 'A cinematic experience in the Wild West.',
     rating: 4.8,
-    category: 'Adventure' // Category added here
+    category: 'Adventure',
+    additionalInfo: {
+      requirements: 'Windows 10 64-bit, Intel Core i5-2500K or AMD FX-6300, 8GB RAM, NVIDIA GTX 770 2GB or AMD Radeon R9 280 3GB, 150GB storage',
+      size: '150GB'
+    }
   },
-  { 
-    name: "Marvel's Spider-Man", 
-    price: 200, 
+  {
+    name: "Marvel's Spider-Man",
+    price: 200,
     description: 'Open-world third-person action-adventure game, in which the player controls Peter Parker',
     rating: 4.8,
-    category: 'Action' // Category added here
+    category: 'Action',
+    additionalInfo: {
+      requirements: 'Windows 10 64-bit, Intel Core i5-4670 or AMD Ryzen 5 1600, 8GB RAM, NVIDIA GTX 950 or AMD Radeon RX 470, 75GB storage',
+      size: '75GB'
+    }
   },
   {
     name: "Assassin's Creed Valhalla",
     price: 59,
     description: 'An action-adventure game set in the Viking Age.',
     rating: 4.5,
-    category: 'Action' // Category added here
+    category: 'Action',
+    additionalInfo: {
+      requirements: 'Windows 10 64-bit, Intel Core i5-4460 or AMD Ryzen 3 1200, 8GB RAM, NVIDIA GTX 960 or AMD Radeon R9 380, 50GB storage',
+      size: '50GB'
+    }
   },
   {
     name: 'Fortnite',
     price: 0,
     description: 'A battle royale game with creative building mechanics.',
     rating: 4.3,
-    category: 'Action' // Category added here
+    category: 'Action',
+    additionalInfo: {
+      requirements: 'Windows 7/8/10 64-bit, Intel Core i3-3225 or equivalent, 4GB RAM, Intel HD 4000 or equivalent, 20GB storage',
+      size: '20GB'
+    }
   },
   {
     name: 'Minecraft',
     price: 26.95,
     description: 'A sandbox game focusing on creativity and survival.',
     rating: 4.7,
-    category: 'Adventure' // Category added here
+    category: 'Adventure',
+    additionalInfo: {
+      requirements: 'Windows 7/8/10 64-bit, Intel Core i3-3210 or AMD A8-7600, 4GB RAM, Intel HD Graphics 4000 or equivalent, 4GB storage',
+      size: '4GB'
+    }
   },
   {
     name: 'Breath of the Wild',
     price: 59.99,
     description: 'An open-world action-adventure game set in Hyrule.',
     rating: 4.9,
-    category: 'Adventure' // Category added here
+    category: 'Adventure',
+    additionalInfo: {
+      requirements: 'Nintendo Switch or Wii U, 4GB RAM, 13.4GB storage',
+      size: '13.4GB'
+    }
   },
   {
     name: 'Resident Evil Village',
     price: 59.99,
     description: 'A survival horror game featuring intense gameplay.',
     rating: 4.6,
-    category: 'Action' // Category added here
+    category: 'Action',
+    additionalInfo: {
+      requirements: 'Windows 10 64-bit, Intel Core i5-7500 or AMD Ryzen 3 1200, 8GB RAM, NVIDIA GTX 1050 Ti or AMD Radeon RX 560, 30GB storage',
+      size: '30GB'
+    }
   },
   {
     name: 'Halo Infinite',
     price: 69.99,
     description: 'A first-person shooter in the Halo franchise.',
     rating: 4.4,
-    category: 'Action' // Category added here
+    category: 'Action',
+    additionalInfo: {
+      requirements: 'Windows 10 64-bit, Intel Core i5-4440 or AMD FX-8370, 8GB RAM, NVIDIA GTX 1050 Ti or AMD Radeon RX 570, 50GB storage',
+      size: '50GB'
+    }
   },
   {
     name: 'Final Fantasy XV',
     price: 19.99,
     description: 'A role-playing game with an epic storyline.',
     rating: 4.2,
-    category: 'RPG' // Category added here
+    category: 'RPG',
+    additionalInfo: {
+      requirements: 'Windows 7/8/10 64-bit, Intel Core i5-2500 or AMD FX-6100, 8GB RAM, NVIDIA GTX 760 or AMD Radeon R9 280, 100GB storage',
+      size: '100GB'
+    }
   },
   {
     name: 'Overwatch 2',
     price: 0,
     description: 'A team-based multiplayer first-person shooter.',
     rating: 4.5,
-    category: 'Action' // Category added here
+    category: 'Action',
+    additionalInfo: {
+      requirements: 'Windows 7/8/10 64-bit, Intel Core i3 or AMD Phenom X3 8650, 6GB RAM, NVIDIA GTX 600 series or AMD Radeon HD 7000 series, 50GB storage',
+      size: '50GB'
+    }
   },
 ];
 
@@ -130,6 +178,12 @@ const seedUsers = [
     email: 'user@example.com',
     password: 'password123',
     isAdmin: false, // Regular user
+  },
+  {
+    username: 'admin_user',
+    email: 'manpreet@124',
+    password: 'admin123',
+    isAdmin: true, // Mark this user as an admin
   },
 ];
 

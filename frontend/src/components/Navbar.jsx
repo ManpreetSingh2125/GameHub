@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import logo from "../components/img/logo.png"; // Adjusted path based on folder structure
 
-const Navbar = ({ cart, logout }) => {
+const Navbar = ({ cart, logout, user }) => {
   const [isActive, setIsActive] = useState(false);
 
-  // Define navigation links in an array for easier management and scalability
-  const navLinks = [
+  // Define navigation links for regular users
+  const regularUserLinks = [
     { to: "/consoles", label: "Consoles" },
     { to: "/games", label: "Games" },
     { to: "/accessories", label: "Accessories" },
@@ -15,6 +15,16 @@ const Navbar = ({ cart, logout }) => {
     { to: "/checkout", label: "Checkout" },
     { to: "#", label: "Logout", onClick: logout }, // Call logout function
   ];
+
+  // Define navigation links for admin users
+  const adminUserLinks = [
+    { to: "/admin/add-products", label: "Add Products" },
+    { to: "/admin/manage-orders", label: "Manage Orders" },
+    { to: "#", label: "Logout", onClick: logout }, // Call logout function
+  ];
+
+  // Determine which links to display based on isAdmin
+  const navLinks = user?.isAdmin ? adminUserLinks : regularUserLinks;
 
   return (
     <nav className="navbar">
