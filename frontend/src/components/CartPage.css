@@ -1,183 +1,238 @@
-/* Cart Page */
+/* General Styles */
 .cart-page {
-    max-width: 800px; /* Wider than CheckoutPage for more space */
-    margin: 50px auto;
-    padding: 30px;
-    background-color: #1a1a1a; /* Dark background */
-    border: 1px solid var(--border-color, #444);
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Deeper shadow for depth */
-    text-align: center;
+  max-width: 1000px; /* Increased from 800px for more space */
+  margin: 50px auto;
+  padding: 40px; /* Increased padding for better spacing */
+  background-color: #1a1a1a; /* Dark background */
+  border: 1px solid var(--border-color, #444);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Deeper shadow for depth */
+  text-align: center;
+}
+
+.cart-page h1 {
+  font-size: 2.2rem; /* Slightly larger for better hierarchy */
+  color: #fff; /* White text */
+  margin-bottom: 40px; /* More space below the heading */
+}
+
+.cart-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* Increased space between sections */
+}
+
+/* Empty Cart Message */
+.empty-cart {
+  color: var(--text-color, #ccc);
+  font-size: 1.2rem; /* Slightly larger for readability */
+}
+
+/* Cart Items */
+.cart-items {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 30px; /* More space below the items */
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--secondary-color, #2c2c2c); /* Dark card background */
+  border: 1px solid var(--border-color, #444);
+  border-radius: 5px;
+  padding: 20px; /* Increased padding for better spacing */
+  margin-bottom: 15px; /* More space between items */
+  transition: background-color 0.3s;
+}
+
+.cart-item:hover {
+  background-color: #3a3a3a; /* Subtle hover effect */
+}
+
+.item-details {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px; /* Added gap for better spacing between name and price */
+}
+
+.item-name {
+  color: var(--text-color, #ccc);
+  font-size: 1.2rem; /* Slightly larger for readability */
+}
+
+.item-price {
+  color: #ff9800; /* Orange for price to match CheckoutPage */
+  font-weight: bold;
+  font-size: 1.2rem; /* Slightly larger for emphasis */
+}
+
+/* Quantity Controls */
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Increased gap for better spacing */
+  margin: 0 30px; /* More margin for wider layout */
+}
+
+.quantity-btn {
+  background-color: #333; /* Dark button background */
+  color: #fff;
+  border: 1px solid var(--border-color, #444);
+  border-radius: 5px;
+  padding: 6px 12px; /* Slightly larger buttons */
+  font-size: 1.1rem; /* Larger font for readability */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.quantity-btn:hover {
+  background-color: #555; /* Lighter on hover */
+}
+
+.quantity {
+  color: #fff;
+  font-size: 1.1rem; /* Slightly larger for readability */
+  min-width: 25px; /* Increased width for better alignment */
+  text-align: center;
+}
+
+/* Remove Button */
+.remove-btn {
+  background-color: #dc3545; /* Red for remove button */
+  color: #fff;
+  border: none;
+  padding: 10px 20px; /* Larger button for better clickability */
+  border-radius: 5px;
+  font-size: 1rem; /* Slightly larger font */
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+.remove-btn:hover {
+  background-color: #c82333; /* Darker red on hover */
+  transform: scale(1.02); /* Slight scale effect on hover */
+}
+
+/* Price Breakdown Section */
+.price-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between rows */
+  padding: 20px; /* Padding for prominence */
+  background-color: var(--secondary-color, #2c2c2c);
+  border: 1px solid var(--border-color, #444);
+  border-radius: 5px;
+}
+
+.price-breakdown div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem; /* Readable font size */
+  color: var(--text-color, #ccc);
+}
+
+.price-breakdown .subtotal,
+.price-breakdown .tax {
+  font-weight: normal; /* Regular weight for subtotal and tax */
+}
+
+.price-breakdown .total {
+  font-weight: bold; /* Bold for total */
+  font-size: 1.4rem; /* Larger font for emphasis */
+  color: #ff9800; /* Highlight total amount */
+}
+
+/* Proceed to Checkout Button */
+.pay-now-btn {
+  background-color: var(--primary-color, #ff5722); /* Orange to match screenshot */
+  color: #fff;
+  border: none;
+  padding: 15px 25px; /* Larger button for better clickability */
+  border-radius: 5px;
+  font-size: 1.2rem; /* Slightly larger font */
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pay-now-btn:hover {
+  background-color: #e64a19; /* Darker orange on hover */
+  transform: scale(1.02); /* Slight scale effect on hover */
+}
+
+.pay-now-btn:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+/* Responsive Cart Page */
+@media (max-width: 768px) {
+  .cart-page {
+    max-width: 90%; /* Adjusted for smaller screens */
+    margin: 20px auto; /* Centered with less margin */
+    padding: 25px; /* Adjusted padding */
   }
-  
+
   .cart-page h1 {
-    font-size: 2rem;
-    color: #fff; /* White text */
-    margin-bottom: 30px;
+    font-size: 1.8rem; /* Adjusted for smaller screens */
   }
-  
-  .cart-content {
-    display: flex;
-    flex-direction: column;
-    gap: 30px; /* Space between sections */
-  }
-  
-  /* Empty Cart Message */
-  .empty-cart {
-    color: var(--text-color, #ccc);
-    font-size: 1.1rem;
-  }
-  
-  /* Cart Items */
-  .cart-items {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 20px;
-  }
-  
+
   .cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--secondary-color, #2c2c2c); /* Dark card background */
-    border: 1px solid var(--border-color, #444);
-    border-radius: 5px;
-    padding: 15px;
-    margin-bottom: 10px;
-    transition: background-color 0.3s;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px; /* Adjusted gap */
+    padding: 15px; /* Adjusted padding */
   }
-  
-  .cart-item:hover {
-    background-color: #3a3a3a; /* Subtle hover effect */
-  }
-  
+
   .item-details {
-    flex: 1;
-    display: flex;
+    width: 100%;
     justify-content: space-between;
-    align-items: center;
+    gap: 10px; /* Adjusted gap */
   }
-  
-  .item-name {
-    color: var(--text-color, #ccc);
-    font-size: 1.1rem;
-  }
-  
+
+  .item-name,
   .item-price {
-    color: #ff9800; /* Orange for price to match CheckoutPage */
-    font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1rem; /* Adjusted for smaller screens */
   }
-  
-  /* Quantity Controls */
+
   .quantity-controls {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 0 20px;
+    margin: 15px 0; /* Adjusted margin */
+    gap: 10px; /* Adjusted gap */
   }
-  
+
   .quantity-btn {
-    background-color: #333; /* Dark button background */
-    color: #fff;
-    border: 1px solid var(--border-color, #444);
-    border-radius: 5px;
-    padding: 5px 10px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    padding: 5px 10px; /* Adjusted button size */
+    font-size: 1rem; /* Adjusted font size */
   }
-  
-  .quantity-btn:hover {
-    background-color: #555; /* Lighter on hover */
-  }
-  
+
   .quantity {
-    color: #fff;
-    font-size: 1rem;
-    min-width: 20px;
-    text-align: center;
+    font-size: 1rem; /* Adjusted font size */
+    min-width: 20px; /* Adjusted width */
   }
-  
-  /* Remove Button */
+
   .remove-btn {
-    background-color: #dc3545; /* Red for remove button */
-    color: #fff;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.1s;
+    padding: 8px 15px; /* Adjusted button size */
+    font-size: 0.9rem; /* Adjusted font size */
   }
-  
-  .remove-btn:hover {
-    background-color: #c82333; /* Darker red on hover */
-    transform: scale(1.02); /* Slight scale effect on hover */
+
+  .price-breakdown {
+    font-size: 1rem; /* Adjusted font size */
+    padding: 15px; /* Adjusted padding */
   }
-  
-  /* Total Price */
-  .total-price {
-    display: flex;
-    justify-content: space-between;
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #fff;
-    padding: 15px;
-    background-color: var(--secondary-color, #2c2c2c);
-    border: 1px solid var(--border-color, #444);
-    border-radius: 5px;
+
+  .price-breakdown .total {
+    font-size: 1.2rem; /* Adjusted font size */
   }
-  
-  /* Responsive Cart Page */
-  @media (max-width: 768px) {
-    .cart-page {
-      max-width: 100%;
-      margin: 20px;
-      padding: 20px;
-    }
-  
-    .cart-page h1 {
-      font-size: 1.5rem;
-    }
-  
-    .cart-item {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 10px;
-    }
-  
-    .item-details {
-      width: 100%;
-      justify-content: space-between;
-    }
-  
-    .item-name,
-    .item-price {
-      font-size: 0.9rem;
-    }
-  
-    .quantity-controls {
-      margin: 10px 0;
-    }
-  
-    .quantity-btn {
-      padding: 4px 8px;
-      font-size: 0.9rem;
-    }
-  
-    .quantity {
-      font-size: 0.9rem;
-    }
-  
-    .remove-btn {
-      padding: 6px 12px;
-      font-size: 0.8rem;
-    }
-  
-    .total-price {
-      font-size: 1.1rem;
-      padding: 10px;
-    }
+
+  .pay-now-btn {
+    font-size: 1.1rem; /* Adjusted font size */
+    padding: 12px 20px; /* Adjusted button size */
   }
+}

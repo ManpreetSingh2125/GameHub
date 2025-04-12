@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
+import Swal from "sweetalert2"; // Import SweetAlert2
 import "./AuthPage.css";
 
 const AuthPage = ({ setUser }) => {
@@ -10,16 +11,12 @@ const AuthPage = ({ setUser }) => {
     email: "",
     password: "",
   });
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
 
   const navigate = useNavigate();
 
   // Reset form when switching tabs
   useEffect(() => {
     setFormData({ username: "", email: "", password: "" });
-    setError("");
-    setSuccess(false);
   }, [activeTab]);
 
   const handleChange = (e) => {
@@ -28,39 +25,71 @@ const AuthPage = ({ setUser }) => {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess(false);
 
     try {
       const response = await api.post("/api/auth/login", {
         email: formData.email,
         password: formData.password,
       });
+
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
         const payload = JSON.parse(atob(response.data.token.split(".")[1]));
         setUser({ id: payload.userId, isAdmin: payload.isAdmin }); // Update user state
-        setSuccess("Login successful!");
-        setTimeout(() => navigate("/"), 2000); // Redirect to homepage after 2 seconds
+
+        // Show success alert
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful!",
+          text: "You are now logged in.",
+          confirmButtonText: "OK",
+          theme: "dark"
+
+        }).then(() => {
+          navigate("/"); // Redirect to homepage after confirmation
+        });
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Login failed.");
+      // Show error alert
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed!",
+        text: err.response?.data?.message || "An error occurred during login.",
+        confirmButtonText: "Try Again",
+        theme: "dark"
+
+      });
     }
   };
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess(false);
 
     try {
       const response = await api.post("/api/auth/register", formData);
+
       if (response.data.token) {
-        setSuccess("Registration successful! Please log in.");
-        setTimeout(() => setActiveTab("login"), 2000); // Switch to login tab after 2 seconds
+        // Show success alert
+        Swal.fire({
+          icon: "success",
+          title: "Registration Successful!",
+          text: "You have been registered successfully. Please log in.",
+          confirmButtonText: "OK",
+          theme: "dark"
+
+        }).then(() => {
+          setActiveTab("login"); // Switch to login tab after confirmation
+        });
       }
     } catch (err) {
-      setError(err.response?.data?.message || "Registration failed.");
+      // Show error alert
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed!",
+        text: err.response?.data?.message || "An error occurred during registration.",
+        confirmButtonText: "Try Again",
+        theme: "dark"
+      });
     }
   };
 
@@ -83,10 +112,6 @@ const AuthPage = ({ setUser }) => {
           Register
         </button>
       </div>
-
-      {/* Error and Success Messages */}
-      {error && <p className="error">{error}</p>}
-      {success && <p className="success">{success}</p>}
 
       {/* Tab Content */}
       <div className="tab-content">

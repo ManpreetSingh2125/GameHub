@@ -11,30 +11,36 @@ const Navbar = ({ cart, logout }) => {
     { to: "/consoles", label: "Consoles" },
     { to: "/games", label: "Games" },
     { to: "/accessories", label: "Accessories" },
-    { to: "/cart", label: `Cart (${cart?.length || 0})` },
+    { to: "/cart", label: `Cart (${cart?.length || 0})` }, // Dynamically display cart item count
     { to: "/checkout", label: "Checkout" },
-    { to: "/auth", label: "Auth" }, // Combined Auth link
-    { to: "#", label: "Logout", onClick: logout }, // Add logout link
+    { to: "#", label: "Logout", onClick: logout }, // Call logout function
   ];
 
   return (
     <nav className="navbar">
+      {/* Logo Section */}
       <div className="logo">
         <Link to="/">
           <img src={logo} alt="GameHub Logo" className="logo-image" />
         </Link>
       </div>
+
+      {/* Desktop Navigation Links */}
       <ul className="desktop-links">
         {navLinks.map((link, index) => (
           <li key={index}>
             {link.onClick ? (
-              <a href="#" onClick={link.onClick}>{link.label}</a>
+              <a href="#" onClick={link.onClick}>
+                {link.label}
+              </a>
             ) : (
               <Link to={link.to}>{link.label}</Link>
             )}
           </li>
         ))}
       </ul>
+
+      {/* Hamburger Menu (Mobile) */}
       <div
         className="hamburger"
         onClick={() => setIsActive(!isActive)}
@@ -43,11 +49,15 @@ const Navbar = ({ cart, logout }) => {
       >
         {isActive ? "✖" : "☰"}
       </div>
+
+      {/* Mobile Navigation Links */}
       <ul className={`mobile-links ${isActive ? "active" : ""}`}>
         {navLinks.map((link, index) => (
           <li key={index}>
             {link.onClick ? (
-              <a href="#" onClick={link.onClick}>{link.label}</a>
+              <a href="#" onClick={link.onClick}>
+                {link.label}
+              </a>
             ) : (
               <Link to={link.to} onClick={() => setIsActive(false)}>
                 {link.label}

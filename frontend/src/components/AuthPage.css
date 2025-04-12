@@ -1,13 +1,27 @@
-/* Dark Theme for Auth Page */
-.auth-page {
-  max-width: 500px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #1a1a1a; /* Dark background for the entire auth container */
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Darker shadow for depth */
-  text-align: center;
+/* Global Styles */
+body {
+  font-family: "Poppins", sans-serif;
+  background-image: url('../components/img/bannerauth1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff;
+  margin: 0;
+  padding: 0;
 }
+
+.auth-page {
+  max-width: 600px; /* Adjusted width */
+  min-height: 400px; /* Adjusted height */
+  margin: 50px auto;
+  padding: 25px;
+  background-color: rgba(26, 26, 26, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  overflow: auto; /* Handle overflow */
+} 
 
 .auth-page h1 {
   margin-bottom: 20px;
@@ -44,11 +58,11 @@
 
 /* Tab Content Styling */
 .tab-content {
-  padding: 20px;
-  background-color: var(--secondary-color, #2c2c2c); /* Dark card background */
-  border: 1px solid var(--border-color, #444); /* Border for the form area */
+  padding: 15px; /* Reduce padding if the card feels too cramped */
+  background-color: var(--secondary-color, #2c2c2c);
+  border: 1px solid var(--border-color, #444);
   border-radius: 0 0 8px 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Darker shadow */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .form-group {
@@ -63,7 +77,8 @@
   color: var(--text-color, #ccc); /* Light gray text for labels */
 }
 
-.form-group input {
+.form-group input,
+.form-group textarea {
   width: 100%;
   padding: 10px;
   font-size: 16px;
@@ -74,7 +89,8 @@
   box-sizing: border-box;
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group textarea:focus {
   outline: none;
   border-color: #007bff; /* Blue border on focus */
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blue glow on focus */
@@ -83,7 +99,7 @@
 button {
   width: 100%;
   padding: 10px;
-  background-color: #007bff; /* Blue button */
+  background-color: #ff5722; /* Orange button */
   color: white;
   border: none;
   border-radius: 4px;
@@ -93,7 +109,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #e64a19; /* Darker orange on hover */
 }
 
 .error {
@@ -122,7 +138,8 @@ button:hover {
     padding: 15px;
   }
 
-  .form-group input {
+  .form-group input,
+  .form-group textarea {
     font-size: 14px;
   }
 

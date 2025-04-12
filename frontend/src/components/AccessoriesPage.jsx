@@ -4,10 +4,14 @@ import "./AccessoriesPage.css";
 
 // Import the accessory images statically
 import a1Image from "../components/img/a1.png"; // Wireless Controller
-import a2Image from "../components/img/a1.png"; // Gaming Headset
-import a3Image from "../components/img/a1.png"; // Charging Dock
-import a4Image from "../components/img/a1.png"; // Gaming Mouse
-import a5Image from "../components/img/a1.png"; // Keyboard
+import a2Image from "../components/img/a2.png"; // Gaming Headset
+import a3Image from "../components/img/a3.png"; // Charging Dock
+import a4Image from "../components/img/a4.png"; // Gaming Mouse
+import a5Image from "../components/img/a5.png"; // Keyboard
+import a6Image from "../components/img/a6.png"; // Keyboard
+import a7Image from "../components/img/a7.png"; // Keyboard
+import a8Image from "../components/img/a8.png"; // Keyboard
+
 
 const AccessoriesPage = ({ addToCart }) => {
   const [accessories, setAccessories] = useState([]);
@@ -21,6 +25,10 @@ const AccessoriesPage = ({ addToCart }) => {
     "Charging Dock": a3Image,
     "Gaming Mouse": a4Image,
     "Keyboard": a5Image,
+    "Monitor Stand": a6Image,
+    "Gaming Chair": a7Image,
+    "VR Headset Adapter": a8Image,
+
   };
 
   useEffect(() => {

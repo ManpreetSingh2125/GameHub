@@ -1,32 +1,38 @@
 import React, { useState } from "react";
-import { loadStripe } from "@stripe/stripe-js";
-import api from "../api";
+import { useNavigate } from "react-router-dom";
 import "./CheckoutPage.css";
 
-// Load Stripe with your Publishable Key
-const stripePromise = loadStripe(
-  "pk_test_51R8aoaDCkaJlxmEzniaexJJJaYyINbr8LmNZ1RhUOOHPUwju7QkJxewmpCdaOrJOMytkvSgsrTpip7sYYpzi0zsC00L56a9XWq"
-);
-
 const CheckoutPage = ({ cart, placeOrder }) => {
-  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     address: "",
+    paymentMethod: "credit-card",
+    cardNumber: "",
+    expiryDate: "",
+    cvv: "",
+    cardHolderName: "",
   });
-  const totalPrice = cart.reduce(
+  const navigate = useNavigate();
+
+  const subtotal = cart.reduce(
     (total, item) => total + item.price * (item.quantity || 1),
     0
   );
+  const taxRate = 0.13;
+  const taxAmount = subtotal * taxRate;
+  const totalAmount = subtotal + taxAmount;
 
-  // Handle form input changes
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-  // Handle the checkout process
-  const handleCheckout = async () => {
+  const handlePaymentMethodChange = (e) => {
+    setFormData({ ...formData, paymentMethod: e.target.value });
+  };
+
+  const handleCheckout = () => {
     if (cart.length === 0) {
       alert("Your cart is empty. Please add items to proceed.");
       return;
@@ -37,45 +43,25 @@ const CheckoutPage = ({ cart, placeOrder }) => {
       return;
     }
 
-    setLoading(true);
-
-    try {
-      // Create a payment intent on the backend
-      const response = await api.post("/api/payment/create-payment-intent", {
-        totalAmount: totalPrice,
-        customerDetails: formData,
-      });
-
-      const stripe = await stripePromise;
-
-      // Redirect to Stripe's payment page
-      const { error } = await stripe.confirmCardPayment(
-        response.data.clientSecret,
-        {
-          payment_method: {
-            card: {
-              token: "tok_visa", // Test token for development
-            },
-            billing_details: {
-              name: formData.name,
-              email: formData.email,
-            },
-          },
-        }
-      );
-
-      if (error) {
-        alert(`Payment failed: ${error.message}`);
-      } else {
-        alert("Payment successful!");
-        placeOrder(); // Clear the cart after successful payment
+    if (formData.paymentMethod === "credit-card" || formData.paymentMethod === "debit-card") {
+      if (
+        !formData.cardNumber ||
+        !formData.expiryDate ||
+        !formData.cvv ||
+        !formData.cardHolderName
+      ) {
+        alert("Please fill in all card details.");
+        return;
       }
-    } catch (err) {
-      console.error("Error processing payment:", err);
-      alert("Payment failed. Please try again.");
-    } finally {
-      setLoading(false);
     }
+
+    placeOrder();
+    navigate("/order-confirmation", {
+      state: {
+        orderSummary: cart,
+        customerDetails: formData,
+      },
+    });
   };
 
   return (
@@ -86,27 +72,123 @@ const CheckoutPage = ({ cart, placeOrder }) => {
           <p className="empty-cart">Your cart is empty. Please add items to proceed.</p>
         ) : (
           <div className="checkout-content">
-            {/* Cart Summary Section */}
-            <div className="cart-summary">
-              <h2>Order Summary</h2>
-              <ul className="cart-items">
-                {cart.map((item) => (
-                  <li key={item._id} className="cart-item">
-                    <span className="item-name">{item.name}</span>
-                    <span className="item-quantity">Qty: {item.quantity || 1}</span>
-                    <span className="item-price">
-                      ${(item.price * (item.quantity || 1)).toFixed(2)}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <div className="total-price">
-                <span>Total:</span>
-                <span>${totalPrice.toFixed(2)}</span>
+            {/* Row of Two Cards */}
+            <div className="cards-row">
+              {/* Card 1: Order Details and Summary */}
+              <div className="card order-card">
+                <h2>Order Details</h2>
+                <ul className="cart-items">
+                  {cart.map((item) => (
+                    <li key={item._id} className="cart-item">
+                      <span className="item-name">{item.name}</span>
+                      <span className="item-quantity">Qty: {item.quantity || 1}</span>
+                      <span className="item-price">
+                        ${(item.price * (item.quantity || 1)).toFixed(2)}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <h3>Summary</h3>
+                <div className="price-breakdown">
+                  <div className="subtotal">
+                    <span>Subtotal:</span>
+                    <span>${subtotal.toFixed(2)}</span>
+                  </div>
+                  <div className="tax">
+                    <span>Tax (13%):</span>
+                    <span>${taxAmount.toFixed(2)}</span>
+                  </div>
+                  <div className="total">
+                    <span>Total:</span>
+                    <span>${totalAmount.toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 2: Payment Method and Card Details */}
+              <div className="card payment-card">
+                <h2>Payment Method</h2>
+                <div className="payment-method-options">
+                  <label>
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value="credit-card"
+                      checked={formData.paymentMethod === "credit-card"}
+                      onChange={handlePaymentMethodChange}
+                    />
+                    Credit Card
+                  </label>
+                  <label>
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value="debit-card"
+                      checked={formData.paymentMethod === "debit-card"}
+                      onChange={handlePaymentMethodChange}
+                    />
+                    Debit Card
+                  </label>
+                </div>
+
+                {/* Card Details (Visible for Credit Card or Debit Card) */}
+                {(formData.paymentMethod === "credit-card" || formData.paymentMethod === "debit-card") && (
+                  <div className="card-details-section">
+                    <h3>Card Details</h3>
+                    <div className="form-group">
+                      <label htmlFor="cardNumber">Card Number</label>
+                      <input
+                        type="text"
+                        id="cardNumber"
+                        name="cardNumber"
+                        placeholder="1234 5678 9012 3456"
+                        value={formData.cardNumber}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="expiryDate">Expiry Date</label>
+                      <input
+                        type="text"
+                        id="expiryDate"
+                        name="expiryDate"
+                        placeholder="MM/YY"
+                        value={formData.expiryDate}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="cvv">CVV</label>
+                      <input
+                        type="text"
+                        id="cvv"
+                        name="cvv"
+                        placeholder="123"
+                        value={formData.cvv}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="cardHolderName">Cardholder Name</label>
+                      <input
+                        type="text"
+                        id="cardHolderName"
+                        name="cardHolderName"
+                        placeholder="John Doe"
+                        value={formData.cardHolderName}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
-            {/* Customer Details Form */}
+            {/* Shipping Details Form */}
             <div className="checkout-form-container">
               <h2>Shipping Details</h2>
               <form className="checkout-form">
@@ -146,13 +228,9 @@ const CheckoutPage = ({ cart, placeOrder }) => {
               </form>
             </div>
 
-            {/* Pay Now Button */}
-            <button
-              className="pay-now-btn"
-              onClick={handleCheckout}
-              disabled={loading}
-            >
-              {loading ? "Processing..." : "Pay Now"}
+            {/* Confirm Order Button */}
+            <button className="pay-now-btn" onClick={handleCheckout}>
+              Confirm Order
             </button>
           </div>
         )}
