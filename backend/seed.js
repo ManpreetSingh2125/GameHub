@@ -243,13 +243,13 @@ async function seedDatabase() {
     await mongoose.connect(process.env.MONGO_URI);
 
     // Clear existing data
-    // await User.deleteMany();
+    await User.deleteMany();
     await Console.deleteMany();
     await Game.deleteMany();
     await Accessory.deleteMany();
 
     // Insert seed data
-    // await User.insertMany(seedUsers);
+    await User.insertMany(seedUsers);
     await Console.insertMany(seedConsoles);
     await Game.insertMany(seedGames);
     await Accessory.insertMany(seedAccessories);
