@@ -29,12 +29,17 @@ const AuthPage = ({ setUser }) => {
         email: formData.email,
         password: formData.password,
       });
-
+  
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
         const payload = JSON.parse(atob(response.data.token.split(".")[1]));
-        setUser({ id: payload.userId, isAdmin: payload.isAdmin }); // Update user state
-
+        // Assuming username is returned in response.data.user
+        setUser({ 
+          id: payload.userId, 
+          isAdmin: payload.isAdmin,
+          username: response.data.user?.username || payload.username // Adjust based on your API response
+        });
+  
         Swal.fire({
           icon: "success",
           title: "Login Successful!",
@@ -42,7 +47,7 @@ const AuthPage = ({ setUser }) => {
           confirmButtonText: "OK",
           theme: "dark",
         }).then(() => {
-          navigate("/"); // Redirect to homepage after confirmation
+          navigate("/");
         });
       }
     } catch (err) {

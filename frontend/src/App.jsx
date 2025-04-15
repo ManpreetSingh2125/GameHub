@@ -4,11 +4,13 @@ import {
   Routes,
   Route,
   Navigate,
+  useNavigate, // Import useNavigate hook
 } from "react-router-dom";
 import Swal from "sweetalert2";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AdminProtectedRoute from "./components/AdminProtectedRoute";
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer"; // Import the Footer component
+import Footer from "./components/Footer";
 import LandingPage from "./components/LandingPage";
 import ConsolesPage from "./components/ConsolesPage";
 import GamesPage from "./components/GamesPage";
@@ -20,7 +22,8 @@ import GameDetailsPage from "./components/GameDetailsPage";
 import OrderConfirmationPage from "./components/OrderConfirmationPage";
 import AdminLoginPage from "./components/AdminLoginPage";
 import AdminDashboard from "./components/AdminDashboard";
-import AdminProtectedRoute from "./components/AdminProtectedRoute";
+import ManageProductsPage from "./components/ManageProductsPage";
+import ViewProductsPage from "./components/ViewProductsPage"; // Import ViewProductsPage
 
 import "./App.css";
 
@@ -31,8 +34,28 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      const payload = JSON.parse(atob(token.split(".")[1]));
-      setUser({ id: payload.userId, isAdmin: payload.isAdmin });
+      try {
+        const payload = JSON.parse(atob(token.split(".")[1])); // Decode the token
+
+        // Check if the token is expired
+        const currentTime = Date.now() / 1000; // Current time in seconds
+        if (payload.exp < currentTime) {
+          // Token is expired, clear it
+          localStorage.removeItem("token");
+          setUser(null);
+        } else {
+          // Token is valid, set the user state including username
+          setUser({
+            id: payload.userId,
+            isAdmin: payload.isAdmin,
+            username: payload.username, // Ensure username is included in the token payload
+          });
+        }
+      } catch (error) {
+        console.error("Error decoding token:", error);
+        localStorage.removeItem("token"); // Clear invalid token
+        setUser(null);
+      }
     }
   }, []);
 
@@ -150,128 +173,115 @@ function App() {
 
   return (
     <Router>
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/auth" element={<AuthPage setUser={setUser} />} />
-        <Route
-          path="/admin-login"
-          element={<AdminLoginPage setUser={setUser} />}
-        />
+      {/* Navbar and Footer should wrap the entire app */}
+      <>
+        {user && <Navbar cart={cart} logout={logout} user={user} />}
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/auth" element={<AuthPage setUser={setUser} />} />
+          <Route
+            path="/admin-login"
+            element={<AdminLoginPage setUser={setUser} />}
+          />
 
-        {/* Protected Routes */}
-        <Route
-          path="/"
-          element={
-            <>
-              {user && <Navbar cart={cart} logout={logout} user={user} />}
-              <ProtectedRoute>
+          {/* Protected Routes */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute user={user}>
                 <LandingPage />
               </ProtectedRoute>
-              {user && <Footer />}
-            </>
-          }
-        />
-        <Route
-          path="/consoles"
-          element={
-            <>
-              {user && <Navbar cart={cart} logout={logout} user={user} />}
-              <ProtectedRoute>
+            }
+          />
+          <Route
+            path="/consoles"
+            element={
+              <ProtectedRoute user={user}>
                 <ConsolesPage addToCart={addToCart} />
               </ProtectedRoute>
-              {user && <Footer />}
-            </>
-          }
-        />
-        <Route
-          path="/games"
-          element={
-            <>
-              {user && <Navbar cart={cart} logout={logout} user={user} />}
-              <ProtectedRoute>
+            }
+          />
+          <Route
+            path="/games"
+            element={
+              <ProtectedRoute user={user}>
                 <GamesPage addToCart={addToCart} />
               </ProtectedRoute>
-              {user && <Footer />}
-            </>
-          }
-        />
-        <Route
-          path="/games/:id"
-          element={
-            <>
-              {user && <Navbar cart={cart} logout={logout} user={user} />}
-              <ProtectedRoute>
+            }
+          />
+          <Route
+            path="/games/:id"
+            element={
+              <ProtectedRoute user={user}>
                 <GameDetailsPage addToCart={addToCart} />
               </ProtectedRoute>
-              {user && <Footer />}
-            </>
-          }
-        />
-        <Route
-          path="/accessories"
-          element={
-            <>
-              {user && <Navbar cart={cart} logout={logout} user={user} />}
-              <ProtectedRoute>
+            }
+          />
+          <Route
+            path="/accessories"
+            element={
+              <ProtectedRoute user={user}>
                 <AccessoriesPage addToCart={addToCart} />
               </ProtectedRoute>
-              {user && <Footer />}
-            </>
-          }
-        />
-        <Route
-          path="/cart"
-          element={
-            <>
-              {user && <Navbar cart={cart} logout={logout} user={user} />}
-              <ProtectedRoute>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute user={user}>
                 <CartPage
                   cart={cart}
                   removeFromCart={removeFromCart}
                   updateCart={updateCart}
                 />
               </ProtectedRoute>
-              {user && <Footer />}
-            </>
-          }
-        />
-        <Route
-          path="/checkout"
-          element={
-            <>
-              {user && <Navbar cart={cart} logout={logout} user={user} />}
-              <ProtectedRoute>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute user={user}>
                 <CheckoutPage cart={cart} placeOrder={placeOrder} />
               </ProtectedRoute>
-              {user && <Footer />}
-            </>
-          }
-        />
-        <Route
-          path="/order-confirmation"
-          element={
-            <>
-              {user && <Navbar cart={cart} logout={logout} user={user} />}
-              <ProtectedRoute>
+            }
+          />
+          <Route
+            path="/order-confirmation"
+            element={
+              <ProtectedRoute user={user}>
                 <OrderConfirmationPage />
               </ProtectedRoute>
-              {user && <Footer />}
-            </>
-          }
-        />
-        <Route
-          path="/admin-dashboard"
-          element={
-            <>
-              {user && <Navbar cart={cart} logout={logout} user={user} />}
+            }
+          />
+
+          {/* Admin Routes */}
+          <Route
+            path="/admin-dashboard"
+            element={
               <AdminProtectedRoute user={user}>
                 <AdminDashboard />
               </AdminProtectedRoute>
-              {user && <Footer />}
-            </>
-          }
-        />
-      </Routes>
+            }
+          />
+          <Route
+            path="/admin/manage-products"
+            element={
+              <AdminProtectedRoute user={user}>
+                <ManageProductsPage />
+              </AdminProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/view-products"
+            element={
+              <AdminProtectedRoute user={user}>
+                <ViewProductsPage />
+              </AdminProtectedRoute>
+            }
+          />
+        </Routes>
+        {user && <Footer />}
+      </>
     </Router>
   );
 }

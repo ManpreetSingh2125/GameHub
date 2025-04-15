@@ -179,12 +179,6 @@ const seedUsers = [
     password: 'password123',
     isAdmin: false, // Regular user
   },
-  {
-    username: 'admin_user',
-    email: 'manpreet@124',
-    password: 'admin123',
-    isAdmin: true, // Mark this user as an admin
-  },
 ];
 
 const seedAccessories = [

@@ -1,41 +1,43 @@
+// Navbar.jsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import logo from "../components/img/logo.png"; // Adjusted path based on folder structure
+import logo from "../components/img/logo.png";
 
 const Navbar = ({ cart, logout, user }) => {
   const [isActive, setIsActive] = useState(false);
 
-  // Define navigation links for regular users
   const regularUserLinks = [
     { to: "/consoles", label: "Consoles" },
     { to: "/games", label: "Games" },
     { to: "/accessories", label: "Accessories" },
-    { to: "/cart", label: `Cart (${cart?.length || 0})` }, // Dynamically display cart item count
+    { to: "/cart", label: `Cart (${cart?.length || 0})` },
     { to: "/checkout", label: "Checkout" },
-    { to: "#", label: "Logout", onClick: logout }, // Call logout function
+    { to: "#", label: "Logout", onClick: logout },
   ];
 
-  // Define navigation links for admin users
   const adminUserLinks = [
-    { to: "/admin/add-products", label: "Add Products" },
-    { to: "/admin/manage-orders", label: "Manage Orders" },
-    { to: "#", label: "Logout", onClick: logout }, // Call logout function
+    { to: "#", label: "Create Admin" },
+    { to: "#", label: "Logout", onClick: logout },
   ];
 
-  // Determine which links to display based on isAdmin
   const navLinks = user?.isAdmin ? adminUserLinks : regularUserLinks;
 
   return (
     <nav className="navbar">
-      {/* Logo Section */}
       <div className="logo">
         <Link to="/">
           <img src={logo} alt="GameHub Logo" className="logo-image" />
         </Link>
       </div>
 
-      {/* Desktop Navigation Links */}
+      {/* Display Username */}
+      {user && (
+        <div className="user-greeting">
+          Welcome, {user.username || "User"}!
+        </div>
+      )}
+
       <ul className="desktop-links">
         {navLinks.map((link, index) => (
           <li key={index}>
@@ -50,7 +52,6 @@ const Navbar = ({ cart, logout, user }) => {
         ))}
       </ul>
 
-      {/* Hamburger Menu (Mobile) */}
       <div
         className="hamburger"
         onClick={() => setIsActive(!isActive)}
@@ -60,8 +61,13 @@ const Navbar = ({ cart, logout, user }) => {
         {isActive ? "✖" : "☰"}
       </div>
 
-      {/* Mobile Navigation Links */}
       <ul className={`mobile-links ${isActive ? "active" : ""}`}>
+        {/* Show username in mobile menu too */}
+        {user && (
+          <li className="user-greeting-mobile">
+            Welcome, {user.username || "User"}!
+          </li>
+        )}
         {navLinks.map((link, index) => (
           <li key={index}>
             {link.onClick ? (

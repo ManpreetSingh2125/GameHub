@@ -154,3 +154,36 @@
 .logout-btn:hover {
   background-color: #e64a19;
 }
+
+
+/* Navbar.css */
+
+/* Desktop user greeting */
+.user-greeting {
+  color: #fff;
+  font-size: 1rem;
+  margin-right: 1rem;
+  font-weight: 500;
+}
+
+/* Mobile user greeting */
+.user-greeting-mobile {
+  color: #fff;
+  font-size: 1rem;
+  padding: 1rem;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Adjust desktop-links to accommodate greeting */
+.desktop-links {
+  display: flex;
+  align-items: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .user-greeting {
+    display: none; /* Hide desktop greeting on mobile */
+  }
+}

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
-import Swal from "sweetalert2"; // Import SweetAlert2
-import "./AdminLoginPage.css"; // Optional: Add custom styles
+import Swal from "sweetalert2";
+import "./AdminLoginPage.css";
 
 const AdminLoginPage = ({ setUser }) => {
   const [formData, setFormData] = useState({
@@ -11,52 +11,62 @@ const AdminLoginPage = ({ setUser }) => {
   });
   const navigate = useNavigate();
 
+  // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Send login request to the backend
       const response = await api.post("/api/auth/login", {
         email: formData.email,
         password: formData.password,
       });
-      if (response.data.token) {
-        console.log(response);
-        const payload = JSON.parse(atob(response.data.token.split(".")[1]));
 
-        // Check if the user is an admin
-        if (!payload.isAdmin) {
-          Swal.fire({
-            icon: "error",
-            title: "Access Denied!",
-            text: "You do not have admin privileges.",
-            confirmButtonText: "OK",
-            theme: "dark",
-          });
-          return;
-        }
+      // Extract token and payload from the response
+      const { token } = response.data;
+      if (!token) {
+        throw new Error("Invalid server response");
+      }
 
-        // Set user state and token
-        localStorage.setItem("token", response.data.token);
-        setUser({ id: payload.userId, isAdmin: payload.isAdmin });
-
-        // Show success alert
+      // Decode the token to extract user information
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      if (!payload.isAdmin) {
+        // Show error if the user is not an admin
         Swal.fire({
-          icon: "success",
-          title: "Admin Login Successful!",
-          text: "Welcome, Admin!",
+          icon: "error",
+          title: "Access Denied!",
+          text: "You do not have admin privileges.",
           confirmButtonText: "OK",
           theme: "dark",
-        }).then(() => {
-          navigate("/"); // Redirect to admin dashboard
         });
-      
-    }
+        return;
+      }
 
+      // Save token to localStorage and update user state with username
+      localStorage.setItem("token", token);
+      setUser({
+        id: payload.userId,
+        isAdmin: payload.isAdmin,
+        username: payload.username || response.data.user?.username || "Admin", // Fallback to "Admin"
+      });
+
+      // Show success message
+      Swal.fire({
+        icon: "success",
+        title: "Admin Login Successful!",
+        text: `Welcome, ${payload.username || response.data.user?.username || "Admin"}!`,
+        confirmButtonText: "OK",
+        theme: "dark",
+      }).then(() => {
+        // Redirect to admin dashboard
+        navigate("/admin-dashboard");
+      });
     } catch (err) {
-      // Show error alert
+      // Show error message for failed login attempts
       Swal.fire({
         icon: "error",
         title: "Login Failed!",
@@ -71,6 +81,7 @@ const AdminLoginPage = ({ setUser }) => {
     <div className="admin-login-page">
       <h1>Admin Login</h1>
       <form onSubmit={handleSubmit}>
+        {/* Email Field */}
         <div className="form-group">
           <label>Email</label>
           <input
@@ -81,6 +92,8 @@ const AdminLoginPage = ({ setUser }) => {
             required
           />
         </div>
+
+        {/* Password Field */}
         <div className="form-group">
           <label>Password</label>
           <input
@@ -91,6 +104,8 @@ const AdminLoginPage = ({ setUser }) => {
             required
           />
         </div>
+
+        {/* Submit Button */}
         <button type="submit">Login as Admin</button>
       </form>
     </div>
