@@ -17,7 +17,7 @@ const Navbar = ({ cart, logout, user }) => {
   ];
 
   const adminUserLinks = [
-    { to: "#", label: "Create Admin" },
+    // { to: "#", label: "Create Admin" },
     { to: "#", label: "Logout", onClick: logout },
   ];
 
